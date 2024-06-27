@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warmindo</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding-top: 70px;
+        }
+        .navbar {
+            background-color: #eceff3;
+            padding: 10px 20px;
+        }
+        .navbar-brand img {
+            height: 50px; 
+        }
+        .navbar-nav .nav-link {
+            color: #6c757d;
+            margin-right: 20px;
+        }
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:hover {
+            color: #d9534f;
+        }
+        .btn-order, .btn-login {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .btn-order:hover, .btn-login:hover {
+            background-color: #c9302c;
+        }
+        .menu-item img {
+            width: 100%;
+        }
+        .footer {
+            background-image: url(./images/additonal/WarmindoFooter.png);
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 30px 0;
+            position: relative;
+        }
+        .footer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content .row:first-child {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .footer-content .row:first-child .col-md-4:first-child {
+            text-align: center;
+        }
+        
+        .footer-content .col-md-4 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer a {
+            color: white;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .contact-form {
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .contact-info {
+            margin-top: 20px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <a class="navbar-brand" href="#">
+        <img src="./images/additonal/Logo.png" alt="Warmindo Logo">
+    </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+        </ul>
+        <button class="btn btn-order ml-3" data-toggle="modal" data-target="#bookingModal">Pesan Sekarang</button>
+    </div>
+</nav>
+
+<!-- Contact Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Tinggalkan Pesan Disini</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="name" placeholder="Nama Kamu">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Nomor HP</label>
+                    <input type="text" class="form-control" id="phone" placeholder="0812-3456-7890">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email Kamu">
+                </div>
+                <div class="form-group">
+                    <label for="message">Pesan</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Pesan Kamu"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Kirim</button>
+            </form>
+        </div>
+        <div class="col-md-6 contact-info">
+            <h5>Weekday</h5>
+            <p>Senin-Jumat: 10:00 - 20:00</p>
+            <h5>Weekend</h5>
+            <p>Sabtu Dan Minggu: 11:00 - 23:00 </p>
+            <p>Geblangan, Tamantirto, Kec. Kasihan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55184</p>
+            <div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31622.383690982348!2d110.2796781!3d-7.8112001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af998d58cf28b%3A0x9e3071c681f3efc8!2sWarmindo%20Elephant%20UMY!5e0!3m2!1sid!2sid!4v1719386374875!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Pesan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="booking-name">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="booking-name" placeholder="Nama Lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label for="people">Jumlah Orang</label>
+                        <input type="number" class="form-control" id="people" placeholder="... Orang">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Tanggal</label>
+                        <input type="date" class="form-control" id="date">
+                    </div>
+                    <div class="form-group">
+                        <p style="font-weight: bold; margin-top: auto; margin-bottom: auto; position: center;"> MENU MAKANAN</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nasgor">Nasi Goreng</label>
+                        <select id="Nasgor" name="Nasgor"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Mie">Mie Goreng</label>
+                        <select id="Mie" name="Mie"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Ayam">Nasi Ayam Goreng</label>
+                        <select id="Ayam" name="Ayam"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Kuah">Mie Kuah</label>
+                        <select id="Kuah" name="Kuah"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Magelang">Magelangan</label>
+                        <select id="Magelang" name="Magelang"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Burjo">Bubur Kacang Ijo</label>
+                        <select id="Burjo" name="Burjo">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <p style="font-weight: bold; margin-top: auto; margin-bottom: auto; position: center;"> MENU MINUMAN</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="Teteh">Es Teh</label>
+                        <select id="Teteh" name="Teteh">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Ruk">Es Jeruk</label>
+                        <select id="Ruk" name="Ruk">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Lo">Es Milo</label>
+                        <select id="Lo" name="Lo">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="PI">Kopi</label>
+                        <select id="PI" name="PI">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="POP">Pop Ice</label>
+                        <select id="POP" name="POP">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="TEH">Teh Hangat</label>
+                        <select id="TEH" name="TEH">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="request">Special Request</label>
+                        <textarea class="form-control" id="request" rows="3" placeholder="Special Request"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">SUBMIT PESANAN</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer text-center">
+    <div class="footer-overlay"></div>
+    <div class="footer-content container">
+        <div class="row">
+            <!-- Bagian lokasi dan logo -->
+            <div class="col-md-4">
+                <img src="./images/additonal/Logo.png" alt="Warmindo Logo" style="width: 200px; height: auto; margin-bottom: 10px;">
+                <a href="https://maps.app.goo.gl/f5VRPurXa9XJHXkJ7" class="custom-btn btn btn-dark mt-2">Lokasi Warmindo</a>
+            </div>
+            <div class="col-md-4">
+                <h5>Jam Buka</h5>
+                <p>Setiap Hari</p>
+                <p>Sekitar 10:00 - 23:00 WIB</p>
+                <p>Tel: 010-02-0340</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Media Sosial</h5>
+                <p>
+                    <a href="https://www.facebook.com/WarmindoIndonesia/">
+                        <img src="./images/Icon/FB.png" alt="Facebook Logo" style="width: 20px; height: 20px; filter: brightness(0) invert(1);"> Facebook
+                    </a><br>
+                    <a href="https://www.instagram.com/warmindoelephant?igsh=MWtnd2I5dW14YmxrMA==">
+                        <img src="./images/Icon/IG.png" alt="Instagram Logo" style="width: 20px; height: 20px; filter: brightness(0) invert(1);"> Instagram
+                    </a><br>
+                    <a href="https://wa.me/+6282314948694">
+                        <img src="./images/Icon/WA.png" alt="WhatsApp Logo" style="width: 20px; height: 20px; filter: brightness(0) invert(1);"> WhatsApp
+                    </a><br>
+                    <a href="https://www.youtube.com/watch?v=VbVUdCuQV44">
+                        <img src="./images/Icon/YT.png" alt="YouTube Logo" style="width: 20px; height: 20px; filter: brightness(0) invert(1);"> YouTube
+                    </a>
+                </p>                
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <a href="index.html" class="footer-link">Home</a>
+            </div>
+            <div class="col-md-4">
+                <a href="about.html" class="footer-link">About</a>
+            </div>
+            <div class="col-md-4">
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+        </div>
+        <p class="mt-4">Copyright © 2024 Warmindo Elephant.</p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+
+<script>
+    function validateForm(formId) {
+        const form = document.getElementById(formId);
+        const inputs = form.querySelectorAll('input, textarea');
+        let isValid = true;
+        
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                isValid = false;
+            }
+        });
+        
+        return isValid;
+    }
+
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        if (validateForm("contact-form")) {
+            Swal.fire(
+                'Berhasil!',
+                'Pesan kamu sudah terkirim!',
+                'success'
+            );
+        } else {
+            Swal.fire(
+                'Oops!',
+                'Silakan isi semua data terlebih dahulu!',
+                'error'
+            );
+        }
+    });
+    function createOptions(selectId, maxOptions) {
+        const selectElement = document.getElementById(selectId);
+        for (let i = 0; i <= maxOptions; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.text = i;
+            selectElement.appendChild(option);
+        }
+    }
+
+    const foodAndDrinkItems = [
+        "Nasgor", "Mie", "Ayam", "Kuah", "Magelang", "Burjo",
+        "Teteh", "Ruk", "Lo", "PI", "POP", "TEH"
+    ];
+
+    foodAndDrinkItems.forEach(item => createOptions(item, 10));
+
+    document.getElementById("booking-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        if (validateForm("booking-form")) {
+            Swal.fire(
+                'Berhasil!',
+                'Pesanan kamu sudah terkirim!',
+                'success'
+            );
+            $('#bookingModal').modal('hide');
+        } else {
+            Swal.fire(
+                'Oops!',
+                'Silakan isi semua data terlebih dahulu!',
+                'error'
+            );
+        }
+    });
+
+</script>
+</body>
+</html>

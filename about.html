@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warmindo</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link href="styles.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding-top: 70px;
+        }
+        .navbar-brand img {
+            height: 50px; 
+        }
+        .navbar {
+            background-color: #eceff3;
+            padding: 10px 20px;
+        }
+        .navbar-nav .nav-link {
+            color: #6c757d;
+            margin-right: 20px;
+        }
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:hover {
+            color: #d9534f;
+        }
+        .btn-order {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .btn-order:hover {
+            background-color: #c9302c;
+        }
+        .menu-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer; 
+        }
+        .menu-item img {
+            width: 100%;
+            height: 200px; 
+            object-fit: cover; 
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .menu-item h4 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        .menu-item .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #d9534f;
+            margin-bottom: 10px;
+        }
+        .menu-item .rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .menu-item .rating span {
+            margin-left: 5px;
+        }
+        .menu-item .reviews {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .divider {
+            margin: 40px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .footer {
+            background-image: url(./images/additonal/WarmindoFooter.png);
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 40px 0;
+            position: relative;
+        }
+        .footer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2;
+        }
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content .row:first-child {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .footer-content .row:first-child .col-md-4:first-child {
+            text-align: center;
+        }
+        
+        .footer-content .col-md-4 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer a {
+            color: white;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .background-image {
+            position: relative;
+            background-image: url(./images/additonal/BG2.webp);
+            background-size: cover;
+            background-position: center;
+            height: 570px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .background-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+            z-index: 1;
+        }
+        .background-image h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <a class="navbar-brand" href="#">
+        <img src="./images/additonal/Logo.png" alt="Warmindo Logo">
+    </a>    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+        </ul>
+        <button class="btn btn-order ml-3" data-toggle="modal" data-target="#bookingModal">Pesan Sekarang</button>
+    </div>
+</nav>
+
+<div class="background-image">
+    <h1 style="font-size: 60px;">About Warmindo</h1>
+</div>
+
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Pesan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="booking-name">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="booking-name" placeholder="Nama Lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label for="people">Jumlah Orang</label>
+                        <input type="number" class="form-control" id="people" placeholder="... Orang">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Tanggal</label>
+                        <input type="date" class="form-control" id="date">
+                    </div>
+                    <div class="form-group">
+                        <p style="font-weight: bold; margin-top: auto; margin-bottom: auto; position: center;"> MENU MAKANAN</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nasgor">Nasi Goreng</label>
+                        <select id="Nasgor" name="Nasgor"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Mie">Mie Goreng</label>
+                        <select id="Mie" name="Mie"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Ayam">Nasi Ayam Goreng</label>
+                        <select id="Ayam" name="Ayam"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Kuah">Mie Kuah</label>
+                        <select id="Kuah" name="Kuah"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Magelang">Magelangan</label>
+                        <select id="Magelang" name="Magelang"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Burjo">Bubur Kacang Ijo</label>
+                        <select id="Burjo" name="Burjo">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <p style="font-weight: bold; margin-top: auto; margin-bottom: auto; position: center;"> MENU MINUMAN</p>
+                    </div><div class="form-group">
+                        <label for="Teteh">Es Teh</label>
+                        <select id="Teteh" name="Teteh">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Ruk">Es Jeruk</label>
+                        <select id="Ruk" name="Ruk">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Lo">Es Milo</label>
+                        <select id="Lo" name="Lo">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="PI">Kopi</label>
+                        <select id="PI" name="PI">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="POP">Pop Ice</label>
+                        <select id="POP" name="POP">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="TEH">Teh Hangat</label>
+                        <select id="TEH" name="TEH">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="request">Special Request</label>
+                        <textarea class="form-control" id="request" rows="3" placeholder="Special Request"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">SUBMIT PESANAN</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Section -->
+<div class="hero">
+    <div class="hero-content">
+        <h1 style="color: black;">LIST MENU</h1>
+        <p style="color: black;">Cocok Untuk Dompet Anda yang sedang mengalami krisis di akhir bulan</p>
+        
+        <div class="table-container">
+            <!-- Tabel Menu Makanan -->
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Menu Makanan</th>
+                        <th scope="col">Harga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mie Goreng</td>
+                        <td>Rp10,000</td>
+                    </tr>
+                    <tr>
+                        <td>Nasi Goreng</td>
+                        <td>Rp15,000</td>
+                    </tr>
+                    <tr>
+                        <td>Nasi Ayam Goreng</td>
+                        <td>Rp15,000</td>
+                    </tr>
+                    <tr>
+                        <td>Mie Kuah</td>
+                        <td>Rp10,000</td>
+                    </tr>
+                    <tr>
+                        <td>Magelangan</td>
+                        <td>Rp15,000</td>
+                    </tr>
+                    <tr>
+                        <td>Bubur Kacang Ijo</td>
+                        <td>Rp7,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Tabel Menu Minuman -->
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Menu Minuman</th>
+                        <th scope="col">Harga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Es Teh</td>
+                        <td>Rp3,000</td>
+                    </tr>
+                    <tr>
+                        <td>Es Jeruk</td>
+                        <td>Rp5,000</td>
+                    </tr>
+                    <tr>
+                        <td>Milo</td>
+                        <td>Rp7,000</td>
+                    </tr>
+                    <tr>
+                        <td>Kopi</td>
+                        <td>Rp5,000</td>
+                    </tr>
+                    <tr>
+                        <td>Pop Ice</td>
+                        <td>Rp5,000</td>
+                    </tr>
+                    <tr>
+                        <td>Teh Hangat</td>
+                        <td>Rp3,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Menu Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Menu Makanan</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#mieGorengModal">
+                <img src="./images/makanan/Mie Goreng.jpg" alt="Mie Goreng">
+                <h4>Mie Goreng</h4>
+                <div class="price">Rp10,000</div>
+                <div class="rating">
+                    <span>4.8/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </span>
+                </div>
+                <div class="reviews">50 Reviews</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#nasiGorengModal">
+                <img src="./images/makanan/Nasi Goreng.jpg" alt="Nasi Goreng">
+                <h4>Nasi Goreng</h4>
+                <div class="price">Rp15,000</div>
+                <div class="rating">
+                    <span>4.8/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </span>
+                </div>
+                <div class="reviews">105 Reviews</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#nasiAyamModal">
+                <img src="./images/makanan/Nasi Ayam Goreng.jpg" alt="Nasi Ayam Goreng">
+                <h4>Nasi Ayam Goreng</h4>
+                <div class="price">Rp15,000</div>
+                <div class="rating">
+                    <span>4.7/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </span>
+                </div>
+                <div class="reviews">55 Reviews</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#mieKuahModal">
+                <img src="./images/makanan/Mie Kuah.jpeg" alt="Mie Kuah">
+                <h4>Mie Kuah</h4>
+                <div class="price">Rp10,000</div>
+                <div class="rating">
+                    <span>4.5/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </span>
+                </div>
+                <div class="reviews">40 Reviews</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#magelanganModal">
+                <img src="./images/makanan/Magelangan.jpg" alt="Magelangan">
+                <h4>Magelangan</h4>
+                <div class="price">Rp15,000</div>
+                <div class="rating">
+                    <span>4.9/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </span>
+                </div>
+                <div class="reviews">60 Reviews</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#buburKacangModal">
+                <img src="./images/makanan/Bubur Kacang Ijo.jpg" alt="Bubur Kacang Ijo">
+                <h4>Bubur Kacang Ijo</h4>
+                <div class="price">Rp7,000</div>
+                <div class="rating">
+                    <span>4.6/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </span>
+                </div>
+                <div class="reviews">48 Reviews</div>
+            </div>
+        </div>
+    </div>
+    <h2 class="text-center mb-4">Menu Minuman</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#estehModal">
+                <img src="./images/minuman/Es Teh.jpg" alt="Es Teh">
+                <h4>Es Teh</h4>
+                <div class="price">Rp3,000</div>
+                <div class="rating">
+                    <span>4.9/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </span>
+                </div>
+                <div class="reviews">120 Reviews</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#esjerukModal">
+                <img src="./images/minuman/Es Jerus.jpg" alt="Es Jeruk">
+                <h4>Es Jeruk</h4>
+                <div class="price">Rp5,000</div>
+                <div class="rating">
+                    <span>4.8/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </span>
+                </div>
+                <div class="reviews">45 Reviews</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#kopiModal">
+                <img src="./images/minuman/Kopi.jpeg" alt="Kopi">
+                <h4>Kopi</h4>
+                <div class="price">Rp5,000</div>
+                <div class="rating">
+                    <span>4.7/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </span>
+                </div>
+                <div class="reviews">55 Reviews</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#miloModal">
+                <img src="./images/minuman/Milo.jpg" alt="Milo">
+                <h4>Milo</h4>
+                <div class="price">Rp7,000</div>
+                <div class="rating">
+                    <span>4.8/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </span>
+                </div>
+                <div class="reviews">40 Reviews</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#popiceModal">
+                <img src="./images/minuman/Pop Ice.jpg" alt="Pop Ice">
+                <h4>Pop Ice</h4>
+                <div class="price">Rp5,000</div>
+                <div class="rating">
+                    <span>4.7/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </span>
+                </div>
+                <div class="reviews">60 Reviews</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="menu-item" data-toggle="modal" data-target="#tehhangatModal">
+                <img src="./images/minuman/Teh Hangat.webp" alt="Teh Hangat">
+                <h4>Teh Hangat</h4>
+                <div class="price">Rp3,000</div>
+                <div class="rating">
+                    <span>4.8/5</span>
+                    <span class="ml-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </span>
+                </div>
+                <div class="reviews">48 Reviews</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<!-- Modal Mie Goreng -->
+<div class="modal fade" id="mieGorengModal" tabindex="-1" role="dialog" aria-labelledby="mieGorengModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mieGorengModalLabel">Mie Goreng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/makanan/Mie Goreng.jpg" class="img-fluid mb-3" alt="Mie Goreng">
+                <p>Mie Goreng adalah salah satu menu favorit kami yang terbuat dari mie yang digoreng dengan bumbu khas Indonesia.</p>
+                <p>Harga: Rp10,000</p>
+                <p>Rating: 4.8/5</p>
+                <p>Ulasan: 50</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nasi Goreng -->
+<div class="modal fade" id="nasiGorengModal" tabindex="-1" role="dialog" aria-labelledby="nasiGorengModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nasiGorengModalLabel">Nasi Goreng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/makanan/Nasi Goreng.jpg" class="img-fluid mb-3" alt="Nasi Goreng">
+                <p>Nasi Goreng adalah hidangan nasi yang digoreng dalam minyak nabati, biasanya ditambahkan dengan telur, sayuran, dan daging ayam.</p>
+                <p>Harga: Rp15,000</p>
+                <p>Rating: 4.8/5</p>
+                <p>Ulasan: 102</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nasi Ayam Goreng -->
+<div class="modal fade" id="nasiAyamModal" tabindex="-1" role="dialog" aria-labelledby="nasiAyamModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nasiAyamModalLabel">Nasi Ayam Goreng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/makanan/Nasi Ayam Goreng.jpg" class="img-fluid mb-3" alt="Nasi Ayam Goreng">
+                <p>Nasi Ayam Goreng adalah hidangan nasi dengan ayam yang digoreng dengan bumbu rempah-rempah khas.</p>
+                <p>Harga: Rp15,000</p>
+                <p>Rating: 4.7/5</p>
+                <p>Ulasan: 55</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Mie Kuah -->
+<div class="modal fade" id="mieKuahModal" tabindex="-1" role="dialog" aria-labelledby="mieKuahModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mieKuahModalLabel">Mie Kuah</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/makanan/Mie Kuah.jpeg" class="img-fluid mb-3" alt="Mie Kuah">
+                <p>Mie Kuah adalah hidangan mie yang disajikan dengan kuah kaldu, biasanya ditambahkan dengan daging ayam, sayuran, dan telur.</p>
+                <p>Harga: Rp10,000</p>
+                <p>Rating: 4.5/5</p>
+                <p>Ulasan: 40</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Magelangan -->
+<div class="modal fade" id="magelanganModal" tabindex="-1" role="dialog" aria-labelledby="magelanganModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="magelanganModalLabel">Magelangan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/makanan/Magelangan.jpg" class="img-fluid mb-3" alt="Magelangan">
+                <p>Magelangan adalah hidangan nasi dengan daging yang dimasak dengan bumbu khas daerah Magelang.</p>
+                <p>Harga: Rp15,000</p>
+                <p>Rating: 4.9/5</p>
+                <p>Ulasan: 60</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Bubur Kacang Ijo -->
+<div class="modal fade" id="buburKacangModal" tabindex="-1" role="dialog" aria-labelledby="buburKacangModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="buburKacangModalLabel">Bubur Kacang Ijo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/makanan/Bubur Kacang Ijo.jpg" class="img-fluid mb-3" alt="Bubur Kacang Ijo">
+                <p>Bubur Kacang Ijo adalah bubur khas Indonesia yang terbuat dari kacang hijau dan santan, disajikan dengan gula merah.</p>
+                <p>Harga: Rp7,000</p>
+                <p>Rating: 4.6/5</p>
+                <p>Ulasan: 48</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Es Teh -->
+<div class="modal fade" id="estehModal" tabindex="-1" role="dialog" aria-labelledby="estehModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="estehModalLabel">Es Teh</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/minuman/Es Teh.jpg" class="img-fluid mb-3" alt="Es Teh">
+                <p>Es Teh adalah minuman teh dingin yang menyegarkan, cocok untuk diminum di hari yang panas.</p>
+                <p>Harga: Rp3,000</p>
+                <p>Rating: 4.9/5</p>
+                <p>Ulasan: 120</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Es Jeruk -->
+<div class="modal fade" id="esjerukModal" tabindex="-1" role="dialog" aria-labelledby="esjerukModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="esjerukModalLabel">Es Jeruk</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/minuman/Es Jerus.jpg" class="img-fluid mb-3" alt="Es Jeruk">
+                <p>Es Jeruk adalah minuman segar yang terbuat dari perasan jeruk asli, ideal untuk melepas dahaga.</p>
+                <p>Harga: Rp3,000</p>
+                <p>Rating: 4.8/5</p>
+                <p>Ulasan: 76</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Kopi -->
+<div class="modal fade" id="kopiModal" tabindex="-1" role="dialog" aria-labelledby="kopiModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="kopiModalLabel">Kopi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/minuman/Kopi.jpeg" class="img-fluid mb-3" alt="Kopi">
+                <p>Kopi adalah minuman khas yang memberikan energi, dengan aroma yang kuat dan rasa yang nikmat.</p>
+                <p>Harga: Rp5,000</p>
+                <p>Rating: 4.7/5</p>
+                <p>Ulasan: 69</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Milo -->
+<div class="modal fade" id="miloModal" tabindex="-1" role="dialog" aria-labelledby="miloModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="miloModalLabel">Milo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/minuman/Milo.jpg" class="img-fluid mb-3" alt="Milo">
+                <p>Milo adalah minuman cokelat yang lezat, disukai oleh semua kalangan, dari anak-anak hingga dewasa.</p>
+                <p>Harga: Rp7,000</p>
+                <p>Rating: 4.8/5</p>
+                <p>Ulasan: 87</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Pop Ice -->
+<div class="modal fade" id="popiceModal" tabindex="-1" role="dialog" aria-labelledby="popiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popiceModalLabel">Pop Ice</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/minuman/Pop Ice.jpg" class="img-fluid mb-3" alt="Pop Ice">
+                <p>Pop Ice adalah minuman es serut dengan berbagai rasa buah yang manis dan segar.</p>
+                <p>Harga: Rp5,000</p>
+                <p>Rating: 4.7/5</p>
+                <p>Ulasan: 65</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Teh Hangat -->
+<div class="modal fade" id="tehhangatModal" tabindex="-1" role="dialog" aria-labelledby="tehhangatModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tehhangatModalLabel">Teh Hangat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./images/minuman/Teh Hangat.webp" class="img-fluid mb-3" alt="Teh Hangat">
+                <p>Teh Hangat adalah minuman teh yang disajikan panas, sangat cocok untuk menghangatkan tubuh.</p>
+                <p>Harga: Rp3,000</p>
+                <p>Rating: 4.8/5</p>
+                <p>Ulasan: 30</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer text-center">
+    <div class="footer-overlay"></div>
+    <div class="footer-content container">
+        <div class="row">
+            <!-- Bagian lokasi dan logo -->
+            <div class="col-md-4">
+                <img src="./images/additonal/Logo.png" alt="Warmindo Logo" style="width: 200px; height: auto; margin-bottom: 10px;">
+                <a href="https://maps.app.goo.gl/f5VRPurXa9XJHXkJ7" class="custom-btn btn btn-dark mt-2">Lokasi Warmindo</a>
+            </div>
+            <div class="col-md-4">
+                <h5>Jam Buka</h5>
+                <p>Setiap Hari</p>
+                <p>Sekitar 10:00 - 23:00 WIB</p>
+                <p>Tel: 010-02-0340</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Media Sosial</h5>
+                <p>
+                    <a href="https://www.facebook.com/WarmindoIndonesia/">
+                        <img src="./images/Icon/FB.png" alt="Facebook Logo" style="width: 20px; height: 20px; filter: brightness(0) invert(1);"> Facebook
+                    </a><br>
+                    <a href="https://www.instagram.com/warmindoelephant?igsh=MWtnd2I5dW14YmxrMA==">
+                        <img src="./images/Icon/IG.png" alt="Instagram Logo" style="width: 20px; height: 20px; filter: brightness(0) invert(1);"> Instagram
+                    </a><br>
+                    <a href="https://wa.me/+6282314948694">
+                        <img src="./images/Icon/WA.png" alt="WhatsApp Logo" style="width: 20px; height: 20px; filter: brightness(0) invert(1);"> WhatsApp
+                    </a><br>
+                    <a href="https://www.youtube.com/watch?v=VbVUdCuQV44">
+                        <img src="./images/Icon/YT.png" alt="YouTube Logo" style="width: 20px; height: 20px; filter: brightness(0) invert(1);"> YouTube
+                    </a>
+                </p>                
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <a href="index.html" class="footer-link">Home</a>
+            </div>
+            <div class="col-md-4">
+                <a href="about.html" class="footer-link">About</a>
+            </div>
+            <div class="col-md-4">
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+        </div>
+        <p class="mt-4">Copyright © 2024 Warmindo Elephant.</p>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function createOptions(selectId, maxOptions) {
+        const selectElement = document.getElementById(selectId);
+        for (let i = 0; i <= maxOptions; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.text = i;
+            selectElement.appendChild(option);
+        }
+    }
+
+    const foodAndDrinkItems = [
+        "Nasgor", "Mie", "Ayam", "Kuah", "Magelang", "Burjo",
+        "Teteh", "Ruk", "Lo", "PI", "POP", "TEH"
+    ];
+
+    foodAndDrinkItems.forEach(item => createOptions(item, 10));
+
+    document.getElementById('booking-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('booking-name').value;
+        const people = document.getElementById('people').value;
+        const date = document.getElementById('date').value;
+        
+        // Check if all required fields are filled
+        if (!name || !people || !date) {
+            Swal.fire(
+                'Oops!',
+                'Silakan isi semua data terlebih dahulu!',
+                'error'
+            );
+        } else {
+            Swal.fire(
+                'Berhasil!',
+                'Pesanan kamu sudah terkirim!',
+                'success'
+            );
+
+            // Optionally, reset the form after submission
+            this.reset();
+        }
+    });
+</script>
+</body>
+</html>
